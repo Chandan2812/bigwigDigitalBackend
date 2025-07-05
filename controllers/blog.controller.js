@@ -1,8 +1,14 @@
 const BlogPost = require("../modals/blog.modal");
+const OpenAI = require("openai");
+require("dotenv").config();
+// OpenAI setup
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 exports.newBlogPost = async (req, res) => {
   try {
-    const { title, slug, excerpt, content, author, tags } = req.body;
+    const { title, slug, excerpt, content, author, tags, prompt } = req.body;
 
     if (!req.file || (!req.file.path && !req.file.secure_url)) {
       return res.status(400).json({ error: "Cover image is required." });
@@ -10,11 +16,41 @@ exports.newBlogPost = async (req, res) => {
 
     const coverImage = req.file.secure_url || req.file.path;
 
+    let finalContent = content;
+
+    // Use AI only if manual content is not provided
+    if (!content && prompt) {
+      const aiResponse = await openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are a professional blog writer. Generate high-quality, SEO-friendly blog content in HTML format. Structure the blog with clear sections: an engaging <h2>Introduction</h2>, a detailed <h2>Main Content</h2> with multiple <p> paragraphs, and a concise <h2>Conclusion</h2>. Use proper <p> tags for paragraphs. Do not include a title.",
+          },
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+        max_tokens: 1800,
+        temperature: 0.7,
+      });
+
+      finalContent = aiResponse.choices[0].message.content;
+    }
+
+    if (!finalContent) {
+      return res
+        .status(400)
+        .json({ error: "Either content or prompt must be provided." });
+    }
+
     const blogPost = new BlogPost({
       title,
       slug,
       excerpt,
-      content,
+      content: finalContent,
       author,
       tags,
       coverImage,
