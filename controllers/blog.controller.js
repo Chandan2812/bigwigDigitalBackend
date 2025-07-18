@@ -1,58 +1,30 @@
 const BlogPost = require("../modals/blog.modal");
-const OpenAI = require("openai");
-require("dotenv").config();
-// OpenAI setup
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+
+// Create new blog post (expects HTML content from React Quill)
 
 exports.newBlogPost = async (req, res) => {
   try {
-    const { title, slug, excerpt, content, author, tags, prompt } = req.body;
+    const { title, slug, excerpt, content, author, tags } = req.body;
 
     if (!req.file || (!req.file.path && !req.file.secure_url)) {
       return res.status(400).json({ error: "Cover image is required." });
     }
 
-    const coverImage = req.file.secure_url || req.file.path;
-
-    let finalContent = content;
-
-    // Use AI only if manual content is not provided
-    if (!content && prompt) {
-      const aiResponse = await openai.chat.completions.create({
-        model: "gpt-4",
-        messages: [
-          {
-            role: "system",
-            content:
-              "You are a professional blog writer. Generate high-quality, SEO-friendly blog content in HTML format. Structure the blog with clear sections: an engaging <h2>Introduction</h2>, a detailed <h2>Main Content</h2> with multiple <p> paragraphs, and a concise <h2>Conclusion</h2>. Use proper <p> tags for paragraphs. Do not include a title.",
-          },
-          {
-            role: "user",
-            content: prompt,
-          },
-        ],
-        max_tokens: 1800,
-        temperature: 0.7,
-      });
-
-      finalContent = aiResponse.choices[0].message.content;
-    }
-
-    if (!finalContent) {
+    if (!content || typeof content !== "string") {
       return res
         .status(400)
-        .json({ error: "Either content or prompt must be provided." });
+        .json({ error: "Blog content (HTML) is required." });
     }
+
+    const coverImage = req.file.secure_url || req.file.path;
 
     const blogPost = new BlogPost({
       title,
       slug,
       excerpt,
-      content: finalContent,
+      content,
       author,
-      tags,
+      tags: tags?.split(",").map((tag) => tag.trim()),
       coverImage,
     });
 
@@ -68,6 +40,7 @@ exports.newBlogPost = async (req, res) => {
   }
 };
 
+// Get all blog posts
 exports.getBlog = async (req, res) => {
   try {
     const data = await BlogPost.find();
@@ -81,6 +54,7 @@ exports.getBlog = async (req, res) => {
   }
 };
 
+// Update blog post by slug
 exports.updateBlogPostBySlug = async (req, res) => {
   const { slug } = req.params;
   const { title, content, author, excerpt, tags } = req.body;
@@ -119,6 +93,7 @@ exports.updateBlogPostBySlug = async (req, res) => {
   }
 };
 
+// Delete blog post by slug
 exports.deleteBlogPostBySlug = async (req, res) => {
   const { slug } = req.params;
 
