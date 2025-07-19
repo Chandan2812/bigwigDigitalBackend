@@ -49,7 +49,7 @@ exports.newBlogPost = async (req, res) => {
 // Get all blog posts
 exports.getBlog = async (req, res) => {
   try {
-    const data = await BlogPost.find.sort({
+    const data = await BlogPost.find().sort({
       datePublished: -1,
     });
     if (!data || data.length === 0) {
