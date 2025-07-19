@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const blogRoutes = require("./routes/blog.route");
 const leadRoutes = require("./routes/leadRoutes");
+const jobApplicationRoutes = require("./routes/jobApplicationRoutes");
+const jobRoutes = require("./routes/jobRoutes");
 
 require("dotenv").config();
 
@@ -15,6 +17,8 @@ app.use(express.json());
 
 app.use("/", blogRoutes);
 app.use("/api/lead", leadRoutes);
+app.use("/api", jobApplicationRoutes);
+app.use("/api", jobRoutes);
 
 // Connect DB and start server
 const PORT = process.env.PORT || 8000;
