@@ -30,6 +30,35 @@ const blogPostSchema = new mongoose.Schema({
     type: [String],
     default: [],
   },
+  category: {
+    type: String,
+    required: true,
+    enum: [
+      "Search Engine Optimization",
+      "Social Media Marketing",
+      "Performance Marketing",
+      "Content Marketing",
+      "Website Designing & Development",
+      "Email Marketing",
+      "Social Media Optimization",
+      "Graphic Designing",
+      "AI and CGI Marketing",
+      "Landing Page Optimization",
+      "Affiliate Marketing",
+      "Video Shoot",
+      "Public Relations",
+      "Influencer Marketing",
+      "Online Reputation Management",
+      "Digital Marketing",
+    ],
+    default: "Digital Marketing",
+  },
+
+  likes: {
+    type: Number,
+    default: 0,
+  },
+
   datePublished: {
     type: Date,
     default: Date.now,
