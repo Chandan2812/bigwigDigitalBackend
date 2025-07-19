@@ -64,17 +64,14 @@ exports.getBlog = async (req, res) => {
 
 exports.getBlogsByCategory = async (req, res) => {
   try {
-    const categoryName = req.params.categoryName;
+    const categorySlug = req.params.categoryName;
+    const categoryName = categorySlug.replace(/-/g, " ");
 
-    const blogs = await BlogPost.find({ category: categoryName }).sort({
+    const blogs = await BlogPost.find({
+      category: new RegExp(`${categoryName}`, "i"),
+    }).sort({
       datePublished: -1,
     });
-
-    if (blogs.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "No blogs found for this category." });
-    }
 
     res.status(200).json(blogs);
   } catch (error) {
