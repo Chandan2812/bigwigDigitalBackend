@@ -52,9 +52,7 @@ exports.getBlog = async (req, res) => {
     const data = await BlogPost.find().sort({
       datePublished: -1,
     });
-    if (!data || data.length === 0) {
-      return res.status(404).json({ msg: "No blog posts found" });
-    }
+
     res.status(200).json(data);
   } catch (error) {
     console.log("Error fetching blogs:", error);
