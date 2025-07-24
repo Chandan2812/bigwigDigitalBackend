@@ -57,7 +57,7 @@ exports.verifyOTP = async (req, res) => {
 
   otpMap.delete(email);
 
-  // Send follow-up confirmation email
+  // 1️⃣ Send confirmation email to the user
   await sendEmail({
     to: email,
     subject: "We've received your query - Bigwig Media Digital",
@@ -85,9 +85,22 @@ exports.verifyOTP = async (req, res) => {
     `,
   });
 
+  // 2️⃣ Send internal notification to HR
+  await sendEmail({
+    to: "accounts@bigwigmedia.in", // 🔁 Replace with actual HR email
+    subject: "New Lead Captured - Bigwig Media",
+    html: `
+      <h3>New Lead Details</h3>
+      <p><strong>Name:</strong> ${data.name}</p>
+      <p><strong>Email:</strong> ${data.email}</p>
+      <p><strong>Phone:</strong> ${data.phone}</p>
+      <p><strong>Message:</strong><br /> ${data.message}</p>
+    `,
+  });
+
   res
     .status(200)
-    .json({ message: "Lead captured and confirmation email sent." });
+    .json({ message: "Lead captured, confirmation sent, HR notified." });
 };
 
 // Get all leads
