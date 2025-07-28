@@ -4,8 +4,10 @@ const upload = require("../config/resumeStorage");
 
 const {
   submitApplication,
+  getAllApplications,
 } = require("../controllers/jobApplicationController");
 
 router.post("/submit-job", upload.single("resume"), submitApplication);
+router.get("/", getAllApplications);
 
 module.exports = router;

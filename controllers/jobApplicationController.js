@@ -54,3 +54,14 @@ exports.submitApplication = async (req, res) => {
       .json({ message: "Failed to send application", error: err.message });
   }
 };
+
+exports.getAllApplications = async (req, res) => {
+  try {
+    const applications = await Application.find().sort({ createdAt: -1 });
+    res.status(200).json(applications);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Failed to fetch applications", error: err.message });
+  }
+};
