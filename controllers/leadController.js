@@ -113,3 +113,43 @@ exports.getAllLeads = async (req, res) => {
     res.status(500).json({ message: "Server error while fetching leads." });
   }
 };
+
+exports.getLeadsLast10Days = async (req, res) => {
+  try {
+    const startDate = moment().subtract(9, "days").startOf("day").toDate();
+
+    const leadsByDay = await Lead.aggregate([
+      {
+        $match: {
+          createdAt: { $gte: startDate },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+          },
+          count: { $sum: 1 },
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]);
+
+    // 🧩 Fill missing dates with count 0
+    const last10Days = Array.from({ length: 10 }, (_, i) =>
+      moment()
+        .subtract(9 - i, "days")
+        .format("YYYY-MM-DD")
+    );
+
+    const result = last10Days.map((date) => {
+      const entry = leadsByDay.find((d) => d._id === date);
+      return { date, count: entry ? entry.count : 0 };
+    });
+
+    res.status(200).json(result);
+  } catch (error) {
+    console.error("Error fetching 10-day leads:", error);
+    res.status(500).json({ message: "Server error fetching lead data." });
+  }
+};

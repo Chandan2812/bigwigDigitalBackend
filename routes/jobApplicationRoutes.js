@@ -8,6 +8,6 @@ const {
 } = require("../controllers/jobApplicationController");
 
 router.post("/submit-job", upload.single("resume"), submitApplication);
-router.get("/", getAllApplications);
+router.get("/all", getAllApplications);
 
 module.exports = router;

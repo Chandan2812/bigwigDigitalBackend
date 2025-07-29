@@ -1,4 +1,5 @@
 const sendEmail = require("../utils/sendEmail");
+const Application = require("../modals/application.model");
 
 exports.submitApplication = async (req, res) => {
   try {
