@@ -135,3 +135,38 @@ exports.deleteBlogPostBySlug = async (req, res) => {
     res.status(500).json({ msg: "Server Error" });
   }
 };
+
+// Update only cover image
+exports.updateBlogImageBySlug = async (req, res) => {
+  try {
+    const { slug } = req.params;
+
+    if (!req.file) {
+      return res.status(400).json({ message: "No image file uploaded" });
+    }
+
+    // Use Cloudinary URL (secure_url or path)
+    const imageUrl = req.file.secure_url || req.file.path;
+
+    const updatedBlog = await BlogPost.findOneAndUpdate(
+      { slug },
+      {
+        coverImage: imageUrl,
+        lastUpdated: new Date(),
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedBlog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    res.status(200).json({
+      message: "Cover image updated successfully",
+      blog: updatedBlog,
+    });
+  } catch (error) {
+    console.error("Error updating cover image:", error);
+    res.status(500).json({ message: "Error updating cover image", error });
+  }
+};
