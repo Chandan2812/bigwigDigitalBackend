@@ -22,6 +22,16 @@ exports.newBlogPost = async (req, res) => {
 
     const coverImage = req.file.secure_url || req.file.path;
 
+    // ✅ Handle schemaMarkup as array (from frontend or Postman)
+    let schemaMarkup = [];
+    if (req.body.schemaMarkup) {
+      if (Array.isArray(req.body.schemaMarkup)) {
+        schemaMarkup = req.body.schemaMarkup;
+      } else {
+        schemaMarkup = [req.body.schemaMarkup];
+      }
+    }
+
     const blogPost = new BlogPost({
       title,
       slug,
@@ -31,6 +41,8 @@ exports.newBlogPost = async (req, res) => {
       category,
       tags: tags?.split(",").map((tag) => tag.trim()),
       coverImage,
+      schemaMarkup, // stored as array
+
       // likes is not passed intentionally — default is 0
     });
 
@@ -81,7 +93,8 @@ exports.getBlogsByCategory = async (req, res) => {
 // Update blog post by slug
 exports.updateBlogPostBySlug = async (req, res) => {
   const { slug } = req.params;
-  const { title, content, author, excerpt, tags, category } = req.body;
+  const { title, content, author, excerpt, tags, category, schemaMarkup } =
+    req.body;
 
   try {
     const updateFields = {
@@ -91,6 +104,8 @@ exports.updateBlogPostBySlug = async (req, res) => {
       ...(excerpt && { excerpt }),
       ...(tags && { tags: tags.split(",").map((tag) => tag.trim()) }),
       ...(category && { category }),
+      ...(schemaMarkup && { schemaMarkup }), // 🔥 store as-is
+
       lastUpdated: new Date(),
     };
 

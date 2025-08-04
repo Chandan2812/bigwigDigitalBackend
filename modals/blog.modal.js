@@ -58,6 +58,10 @@ const blogPostSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  schemaMarkup: {
+    type: [String], // array of JSON-LD strings
+    default: [],
+  },
 
   datePublished: {
     type: Date,
