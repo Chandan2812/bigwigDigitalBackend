@@ -1,11 +1,12 @@
 const { BetaAnalyticsDataClient } = require("@google-analytics/data");
 const path = require("path");
+require("dotenv").config();
 
 // Auth using service account JSON key
 const analyticsDataClient = new BetaAnalyticsDataClient({
   keyFilename: path.join(
     __dirname,
-    "../config/formal-atrium-468108-t9-639a4320d44b.json"
+    "../config/formal-atrium-468108-t9-7855262b3c4e.json"
   ), // adjust path as needed
 });
 
