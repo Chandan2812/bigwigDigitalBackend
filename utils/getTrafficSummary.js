@@ -4,11 +4,7 @@ const path = require("path");
 
 // Initialize the GA4 client using environment variable
 const analyticsDataClient = new BetaAnalyticsDataClient({
-  keyFilename: path.join(
-    __dirname,
-    "..",
-    process.env.GOOGLE_APPLICATION_CREDENTIALS
-  ),
+  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
 });
 
 // GA4 Property ID

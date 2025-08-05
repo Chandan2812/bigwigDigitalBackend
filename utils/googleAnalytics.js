@@ -4,11 +4,7 @@ require("dotenv").config();
 
 // Auth using service account JSON key
 const analyticsDataClient = new BetaAnalyticsDataClient({
-  keyFilename: path.join(
-    __dirname,
-    "..",
-    process.env.GOOGLE_APPLICATION_CREDENTIALS
-  ),
+  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
 });
 
 // Replace with your actual GA4 property ID
