@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "formal-atrium-468108-t9",
+  "private_key_id": "639a4320d44b1ef8a5ee0b8ae199b28adb7216a5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDHeuQlrvaa+vka\ny3THMqFh0niLt+OliuVl5MIKKn8MeOqZZElVQYjaCbz6T/yI5F7yTcF5F1l4Kg/I\nfoTTUhm4qupMSitr9zesZkXoHf2e4wjiIMypa38gQyucIBTU4ByVhaC1J+SWF+wM\nX1j573GROKasYkYnBJCRyNKINpJvX7wxF2Yt9ZteUxtLwnmRr2NA5XtlPVVhVno7\nNVZ/d6Ip7l1cEM4fxMyD17UJuzIpVN5tlN70lA/byAkHU8uPkwO/1AoSui/bBfrv\nxyFuEhUXgFmZdOcP7ALpemH+5GG/pkt9lyVCHQxdJWlbFZLf4vmnveLpmL+42K7D\nOyurlOxjAgMBAAECggEACZU0FpdZeMfWZbIhHFyoogwRXGzraQ12HbdSlwMZnV4b\nBF7BTcYwg9ZJ7Msg5Ov2Sl+ajBhSD6gS9V0WlmxFmLh6jvWqhleW+2ziWNdFUs0H\nT+L8J1C8XQQSY+qqoDCv+YLfiImvvSzNsH54G3GkRrIDrRj/fmpauOt+fwACzYok\nY1K6uBczH9Hhv/gDwyrsZGJ+m9qtrTgCJT69hvruDUUTreRj1agUYCq+mHQIksAE\nAD/CpgHgq+SIQKuHrTeGFBRiydTedjkquDwU7gMshqGvZvt48wFzIPHcs9DvM2nt\nAt9rvjaj250cgkvWIKojQbQz0BzRmjec4mygKPHu2QKBgQDzmPvYlunpnCcQO4aL\n/htfJgglGQN+3LPmWeS0xuo5I/zUqakCqY4ZCxxgvfrY4tmJ7cyQBgZUPkXdsMO/\nmppP9MdgiLR3Wprc2R24aQrUVGlMjkn8gl1/e+FR8GXsmyb6E3huVMWxV+n3fOH8\nJwqKZC61LM79AZHYVgiBgXP0DwKBgQDRouK2QtbZw0hm9YdF0C6L2GMR93KNGde6\nBbmt6dhS6r9XSc3rOWYMtLsayqgdhyiup1Hl5P9MgaDyrHlOHKm5OBtBTjQ1M3IB\ntGzDuuPBvXZYzM+UkP5cowxdrq7IfK80L3VRIEQh/945IfYU7t6szbMaoWN3EJ8+\nV2RFsl/ebQKBgEIVZ4Ubc7uXTBWgQGDr/5rxY1ZFEeixkPBVxLCyIcp8k9NRb3M0\nckMi+4DXKRz7dY5wf4U2zTK/bg61LHVnSKOWQRxUGbkjUE3HbMOhY3m0qJhHJZUl\n/J1gCwFCmTP15z4CWDJ+Nt9kfSlRrLDOGpLumKk3zbNfYKRyun3/k2hLAoGBAI7h\nshv/mmh5zVM/bZ+LsO3n4j5QpWa+gmZrmI6Mn8CD9z4LM6prSL7IP+6Wyda2VGgV\n6qACYG9IuuYr39H5f0SalRkBsFvCYKYAz1DohGt8Mrl7ftAHsxZ4mukPMlm7gb7T\nyeYtU8LInjHaj9rcpDCrUrOH5D82uRLIhbNrTCRRAoGASBK4ooJ9eU7QBB0GSn/D\nccBgI6TkLS4P0b+EljYQ9oKHj2X77BxHrC1MbU5cVoLx/cShV1VFmCe7bNWzMyLI\n8uGTBCdBKx8m+o4nFR2koQ3qDb7JzPRpszMIUKjhK8wGimbqkIuU3FMYklQeq83I\nrCImIY/CmwlSprUTx89ZBgg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "google-analytics-fetch@formal-atrium-468108-t9.iam.gserviceaccount.com",
+  "client_id": "108884763452668460891",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/google-analytics-fetch%40formal-atrium-468108-t9.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
