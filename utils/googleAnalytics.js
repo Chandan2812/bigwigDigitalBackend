@@ -6,8 +6,9 @@ require("dotenv").config();
 const analyticsDataClient = new BetaAnalyticsDataClient({
   keyFilename: path.join(
     __dirname,
-    "../config/formal-atrium-468108-t9-7855262b3c4e.json"
-  ), // adjust path as needed
+    "..",
+    process.env.GOOGLE_APPLICATION_CREDENTIALS
+  ),
 });
 
 // Replace with your actual GA4 property ID

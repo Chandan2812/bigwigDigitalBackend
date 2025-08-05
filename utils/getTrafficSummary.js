@@ -1,18 +1,17 @@
 const { BetaAnalyticsDataClient } = require("@google-analytics/data");
-const path = require("path");
 require("dotenv").config();
+const path = require("path");
 
-// Auth using service account JSON key
-const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
-
+// Initialize the GA4 client using environment variable
 const analyticsDataClient = new BetaAnalyticsDataClient({
   keyFilename: path.join(
     __dirname,
-    "../config/formal-atrium-468108-t9-7855262b3c4e.json"
-  ), // adjust path as needed
+    "..",
+    process.env.GOOGLE_APPLICATION_CREDENTIALS
+  ),
 });
 
-// Replace with your actual GA4 property ID
+// GA4 Property ID
 const PROPERTY_ID = "499321668";
 
 async function SeoSummary() {
